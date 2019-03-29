@@ -17,55 +17,53 @@ PPfunction <- function(data) {
 
 
 #### Removing Outliers #### 
+# 
+# RemoveOutliersF <- function(D,V)  {
+#  Out <- boxplot(D$V ,plot = FALSE)$out
+#   K <- D[-which(D$V %in% Out),]
+#   K
+#   #Out <- boxplot(D$V ,plot = FALSE)$out
+#   #K <- D[-which(D$V %in% Out),]
+#   #K
+#   
+ #}
+  
+  
 
 
-B <-boxplot(N$Volume)
-
-O <- boxplot(N$Volume)$out
-
-N[which(N$Volume %in% O),]
-
-N <- N[-which(N$Volume %in% O),]
 
 
 
+RmOut <- function(D,V)
+  {
+    
+  Out <- boxplot(D$V ,plot = FALSE)$out
+  K <- D[-which(D$V %in% Out),]
+  K
+}
 
-#### Plots #### 
-
-
-ggplot(N,
-       aes(x=Volume))+
-  geom_bar(color="blue", fill="yellow")
-
+L <- RmOut(EP,Volume)
 
 ###
-MyPlotFunction <- function(data,variable,variable2)
+MyPlotFunction <- function(data,variable=0,variable2=0)
 {
-          if (variable2 == 0)
-            {  
-        G <- ggplot(data,aes(x=variable) ) + geom_bar() + labs(title = 'Bar Plot' ) + labs(title = 'Bar Plot' )
-          }
-          else 
-          G <- ggplot(data,aes(x=variable,y=variable2)) + geom_bar(stat = "Identity") + labs(x = toString(variable), y = toString(variable2), title = 'Bar Plot' )
-           
-          
-          
-    }
-
-
-G <- MyPlotFunction(N,N$Volume,0)  
+  if (variable2 == 0)
+  {  
+    G <- ggplot(data,aes(x= data[[variable]]) ) + 
+      geom_bar()+ labs( x = variable) 
+  }
+    else
+     G <- ggplot(data,aes(data,x= data[[variable]],y= data[[variable2]])) +
+        geom_bar(stat = "Identity") + 
+        labs(x = variable,y=variable2 , title = 'Bar Plot' )
   
-G4 <- "ola"  
-  
-### 
 
-E1 <-subset(EP, EP$ProductType =="PC")
 
-E2 <- subset(EP, EP$ProductType =="Laptop")
+}
 
-rbind(E1,E2)
 
-E3 <- subset(EP, EP$ProductType == "SmartPhone")
+
+
 
 ###
 

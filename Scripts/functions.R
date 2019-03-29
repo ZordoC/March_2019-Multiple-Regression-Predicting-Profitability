@@ -1,14 +1,6 @@
 #### Pre Process Function ####
 
 
-B <-boxplot(N$Volume)
-
-O <- boxplot(N$Volume)$out
-
-
-N[which(N$Volume %in% O),]
-
-N <- N[-which(N$Volume %in% O),]
 
 
 
@@ -27,7 +19,7 @@ PPfunction <- function(data) {
   
 }
 
-N <- PPfunction(EP)
+
 
 #### Train and Test Set function ####
 
@@ -46,7 +38,7 @@ TrainAndTestSets <- function(label,p,data,seed){
 
 
 
-list <-TrainAndTestSets(N$Volume,0.75,N,123)
+
 
 
 
@@ -65,7 +57,3 @@ TrainingFunction <- function(formula,data,method,tune){
 }
 
 
-M <- TrainingFunction(Volume ~ ., list$trainingSet, "rf" , 3)
-
-
-M

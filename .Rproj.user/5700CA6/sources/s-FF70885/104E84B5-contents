@@ -15,7 +15,6 @@ TrainAndTestSets <- function(label,p,data,seed){
 
 
 
-list <-TrainAndTestSets(N$Volume,0.75,N,123)
 
 
 
@@ -34,7 +33,6 @@ TrainingFunction <- function(formula,data,method,tune){
 }
 
 
-M <- TrainingFunction(Volume ~ ., list$trainingSet, "rf" , 3)
 
 
 M
