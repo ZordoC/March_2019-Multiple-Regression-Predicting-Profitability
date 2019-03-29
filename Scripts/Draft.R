@@ -1,6 +1,8 @@
 library(caret)
 library(readr)
 library(rstudioapi)
+library(e1071)
+library(dplyr)
 
 
 
@@ -9,24 +11,53 @@ current_path = getActiveDocumentContext()$path
 setwd(dirname(current_path))
 setwd("..")
 rm(current_path)
-
+#rm(list = setdiff(ls(), lsf.str()))
 EP <- read.csv( file ="./data/Epa.csv" , header = TRUE , sep = ',')
 NP <- read.csv(file = "./data/Npa.csv", header = TRUE , sep =',')
-
-#  rm(list=ls(all=TRUE))
-rm(list = setdiff(ls(), lsf.str()))
-
-plot(M)
-bptest()
-B <-boxplot(EP$Volume)
-O <- boxplot(EP$Volume)$out
-EP[which(EP$Volume %in% O),]
-EP <- EP[-which(EP$Volume %in% O),]
+EP <- EP[,c(1,5,9,18)]
 
 
-N <-PPfunction(EP)
 
-list <-TrainAndTestSets(N$Volume,0.75,N,123)
+Knn <- EP %>% mutate_at(scale, .vars = vars(-1))
+
+
+Knn <- PPfunction(Knn)
+
+EP <- PPfunction(EP)
+
+
+
+Knn <- RmOut(Knn)
+
+EP <- RmOut(EP)
+
+List <- TrainAndTestSets(EP$Volume,0.75,EP,123)
+
+ListK <- TrainAndTestSets(Knn$Volume,0.75,Knn,123)
+
+
+ModelRandomForest <- TrainingFunction(Volume ~.,List$trainingSet,"rf",5)
+
+ModelRandomForest
+
+KNN <- TrainingFunction(Volume ~.,ListK$trainingSet,"knn",5)
+
+PredictionRandomForest <- predict(ModelRandomForest,List$testingSet)
+
+ postResample(PredictionRandomForest,List$testingSet$Volume)
+
+KnnPrediction <- predict(KNN,testingsetknn)
+
+testingsetknn <- ListK$testingSet
+
+postResample(KnnPrediction,testingsetknn$Volume)
+
+PredictionRandomForest <-  as.data.frame(PredictionRandomForest)
+
+
+
+
+
 
 
 
