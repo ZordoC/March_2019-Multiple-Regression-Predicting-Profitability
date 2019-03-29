@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553847356826.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "94A56F8",
+    "lastKnownWriteTime" : 1553852362,
+    "last_content_update" : 1553852362427,
+    "path" : "~/Documents/Ubiqum/R-Task3/Scripts/Draft.R",
+    "project_path" : "Scripts/Draft.R",
+    "properties" : {
+        "cursorPosition" : "13,65",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
