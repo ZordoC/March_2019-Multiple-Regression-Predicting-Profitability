@@ -7,14 +7,14 @@
     "folds" : "",
     "hash" : "0",
     "id" : "8D5570DA",
-    "lastKnownWriteTime" : 1553969475,
-    "last_content_update" : 1553969475,
+    "lastKnownWriteTime" : 1553981315,
+    "last_content_update" : 1553981315,
     "path" : "~/Documents/Ubiqum/R-Task3/Scripts/Process.R",
     "project_path" : "Scripts/Process.R",
     "properties" : {
-        "cursorPosition" : "140,0",
+        "cursorPosition" : "79,48",
         "docOutlineVisible" : "1",
-        "scrollLine" : "107"
+        "scrollLine" : "0"
     },
     "relative_order" : 6,
     "source_on_save" : false,

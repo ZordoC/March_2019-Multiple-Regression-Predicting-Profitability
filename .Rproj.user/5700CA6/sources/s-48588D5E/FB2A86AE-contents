@@ -22,7 +22,7 @@ TrainAndTestSets <- function(label,p,data,seed){
 #### Training Functions ####
 
 
-TrainingFunction <- function(method,formula,data,tune,cost = 1000 , gamma = 0.001)
+TrainingFunction <- function(method,formula,data,tune)
   {
   
   fitcontrol <-  trainControl(method = "repeatedcv", repeats = 4)
@@ -41,7 +41,7 @@ TrainingFunction <- function(method,formula,data,tune,cost = 1000 , gamma = 0.00
    
   else if (method == "svm"){ 
      
-    Model <- svm(formula, data = data,cost=cost , gamma = gamma)
+    Model <- svm(formula, data = data,cost=1000 , gamma = 0.001)
   
     
     }

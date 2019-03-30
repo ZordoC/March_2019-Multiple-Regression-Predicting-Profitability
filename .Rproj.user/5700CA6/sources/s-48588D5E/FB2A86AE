@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1553875008374.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "0",
     "id" : "FB2A86AE",
-    "lastKnownWriteTime" : 1553979127,
-    "last_content_update" : 1553980949926,
+    "lastKnownWriteTime" : 1553981315,
+    "last_content_update" : 1553981315,
     "path" : "~/Documents/Ubiqum/R-Task3/Scripts/ModelFunctions.R",
     "project_path" : "Scripts/ModelFunctions.R",
     "properties" : {
-        "cursorPosition" : "27,51",
-        "scrollLine" : "19"
+        "cursorPosition" : "8,28",
+        "scrollLine" : "0"
     },
     "relative_order" : 5,
     "source_on_save" : false,
