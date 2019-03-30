@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553874507839.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "232969350",
+    "id" : "776CF17E",
+    "lastKnownWriteTime" : 1553871440,
+    "last_content_update" : 1553875421826,
+    "path" : "~/Documents/Ubiqum/R-Task3/Scripts/Process.R",
+    "project_path" : "Scripts/Process.R",
+    "properties" : {
+        "cursorPosition" : "141,0",
+        "docOutlineVisible" : "1",
+        "scrollLine" : "126"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

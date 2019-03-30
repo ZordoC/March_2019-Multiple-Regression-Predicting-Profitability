@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553873667191.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2441306216",
+    "id" : "CDDD3B57",
+    "lastKnownWriteTime" : 1553875800,
+    "last_content_update" : 1553875800458,
+    "path" : "~/Documents/Ubiqum/R-Task3/Info/Draft.Rmd",
+    "project_path" : "Info/Draft.Rmd",
+    "properties" : {
+        "cursorPosition" : "3,43",
+        "last_setup_crc32" : "FF70885f7c85dce",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

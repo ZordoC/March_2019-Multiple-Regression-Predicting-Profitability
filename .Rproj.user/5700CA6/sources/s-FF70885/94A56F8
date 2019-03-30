@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "94A56F8",
-    "lastKnownWriteTime" : 1553872298,
-    "last_content_update" : 1553872740451,
+    "lastKnownWriteTime" : 1553873643,
+    "last_content_update" : 1553875280876,
     "path" : "~/Documents/Ubiqum/R-Task3/Scripts/Draft.R",
     "project_path" : "Scripts/Draft.R",
     "properties" : {
-        "cursorPosition" : "61,25",
-        "scrollLine" : "0"
+        "cursorPosition" : "54,0",
+        "scrollLine" : "31"
     },
     "relative_order" : 1,
     "source_on_save" : false,
