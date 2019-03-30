@@ -16,10 +16,16 @@ PPfunction <- function(data) {
 
 #### Normalization for KNN ####
 
-normFunc <- function(x)
-  {
-  (x-mean(x, na.rm = T))/sd(x, na.rm = T)
-  }
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+
+
+####DeNormalize####
+
+denormalize <- function(x,minval,maxval) {
+  x*(maxval-minval) + minval
+}
 
 # How to apply :  , need dplyr package
 # EP[2:4] <- apply(EP[2:4],2,normFunc)
