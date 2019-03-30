@@ -6,7 +6,7 @@ library(dplyr)
 library(rpart)
 
 #For cleaning variables
-# rm(list = setdiff(ls(), lsf.str()))
+  # rm(list = setdiff(ls(), lsf.str()))
 
 current_path = getActiveDocumentContext()$path
 setwd(dirname(current_path))
@@ -34,7 +34,7 @@ TestResultsRF <- postResample(PredictionRandomForest,List$testingSet$Volume)
 
 #### SVM ####
 
-svm.model <- TrainingFunction("svm",Volume~.,List$trainingSet,5)  
+svm.model <- TrainingFunction("svm",Volume~.,List$trainingSet,5,100000,0.0001)  
 
 svm.pred <- predict(svm.model,List$testingSet)
 
