@@ -14,42 +14,16 @@ PPfunction <- function(data) {
   
 }
 
-#### Normalization for KNN ####
 
-normalize <- function(x) {
-  return ((x - min(x)) / (max(x) - min(x)))
-}
-
-
-####DeNormalize####
-
-denormalize <- function(x,minval,maxval) {
-  x*(maxval-minval) + minval
-}
 
 # How to apply :  , need dplyr package
 # EP[2:4] <- apply(EP[2:4],2,normFunc)
 
 #### Removing Outliers #### 
-# 
-# RemoveOutliersF <- function(D,V)  {
-#  Out <- boxplot(D$V ,plot = FALSE)$out
-#   K <- D[-which(D$V %in% Out),]
-#   K
-#   #Out <- boxplot(D$V ,plot = FALSE)$out
-#   #K <- D[-which(D$V %in% Out),]
-#   #K
-#   
-#}
-
-
-
-
-
-
 
 RmOut <- function(D,V)
-{
+
+  {
   
   Out <- boxplot(D$V ,plot = FALSE)$out
   K <- D[-which(D$V %in% Out),]

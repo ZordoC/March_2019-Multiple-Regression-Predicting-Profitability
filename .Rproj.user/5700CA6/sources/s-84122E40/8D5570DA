@@ -5,16 +5,16 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2396672004",
+    "hash" : "0",
     "id" : "8D5570DA",
-    "lastKnownWriteTime" : 1553985992,
-    "last_content_update" : 1553985992555,
+    "lastKnownWriteTime" : 1554109472,
+    "last_content_update" : 1554109472930,
     "path" : "~/Documents/Ubiqum/R-Task3/Scripts/Process.R",
     "project_path" : "Scripts/Process.R",
     "properties" : {
-        "cursorPosition" : "27,1",
+        "cursorPosition" : "117,17",
         "docOutlineVisible" : "1",
-        "scrollLine" : "19"
+        "scrollLine" : "106"
     },
     "relative_order" : 6,
     "source_on_save" : false,

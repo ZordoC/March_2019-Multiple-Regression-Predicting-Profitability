@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4034651363",
+    "hash" : "0",
     "id" : "FB2A86AE",
-    "lastKnownWriteTime" : 1553985832,
-    "last_content_update" : 1553985832430,
+    "lastKnownWriteTime" : 1554109463,
+    "last_content_update" : 1554109463306,
     "path" : "~/Documents/Ubiqum/R-Task3/Scripts/ModelFunctions.R",
     "project_path" : "Scripts/ModelFunctions.R",
     "properties" : {
-        "cursorPosition" : "22,0",
-        "scrollLine" : "30"
+        "cursorPosition" : "60,0",
+        "scrollLine" : "46"
     },
     "relative_order" : 5,
     "source_on_save" : false,
