@@ -1,0 +1,49 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","library(caret)"
+"2","Loading required package: lattice
+"
+"2","Loading required package: ggplot2
+"
+"0","library(readr)"
+"0","library(rstudioapi)"
+"0","library(e1071)"
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(rpart)"
+"0","library(reshape)"
+"2","
+Attaching package: ‘reshape’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    rename
+
+"
+"0","library(corrplot)"
+"2","corrplot 0.84 loaded
+"
+"0","#library(prettydoc)"
+"0","#"
+"0","#"
+"0","#For cleaning variables"
+"0","#rm(list = setdiff(ls(), lsf.str()))"
+"0","#current_path = getActiveDocumentContext()$path"
+"0","#setwd(dirname(current_path))"
+"0","#setwd("".."")"
+"0","#rm(current_path)"
+"0","EP <- read.csv( file =""/home/zordo/Documents/Ubiqum/R-Task3/data/Epa.csv"" , header = TRUE , sep = ',')"
+"0","NP <- read.csv(file = ""/home/zordo/Documents/Ubiqum/R-Task3/data/Npa.csv"", header = TRUE , sep =',')"

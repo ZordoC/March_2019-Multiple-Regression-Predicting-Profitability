@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554275988313.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D8904205",
+    "lastKnownWriteTime" : 1554211810,
+    "last_content_update" : 1554211810,
+    "path" : "~/Downloads/testing_ggplot_2.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "31,0",
+        "scrollLine" : "12"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

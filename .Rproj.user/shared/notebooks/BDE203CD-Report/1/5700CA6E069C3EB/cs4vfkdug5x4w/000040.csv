@@ -1,0 +1,4 @@
+"0","ggplot(EP, aes(x=ProductType)) + geom_histogram() 
+"
+"2","Error in FUN(X[[i]], ...) : object 'ProductType' not found
+"

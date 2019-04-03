@@ -1,0 +1,4 @@
+"0","ggplot(Lol,"
+"0","      aes(Lol$Volume,RLTknn))+"
+"0"," geom_point(color=""red"")+"
+"0"," geom_smooth()"

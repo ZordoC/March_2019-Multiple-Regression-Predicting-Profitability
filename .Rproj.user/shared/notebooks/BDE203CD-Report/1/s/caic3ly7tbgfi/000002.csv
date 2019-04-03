@@ -1,0 +1,8 @@
+"0","RmOut <- function(D,V)"
+"0","  {"
+"0","  "
+"0","  Out <- boxplot(D$V ,plot = FALSE)$out"
+"0","  K <- D[-which(D$V %in% Out),]"
+"0","  K"
+"0","  "
+"0","}"

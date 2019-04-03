@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554191317294.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "86057A67",
+    "lastKnownWriteTime" : 1554224916,
+    "last_content_update" : 1554277983857,
+    "path" : "~/Documents/Ubiqum/R-Task3/Info/Report.Rmd",
+    "project_path" : "Info/Report.Rmd",
+    "properties" : {
+        "cursorPosition" : "240,1",
+        "docOutlineVisible" : "1",
+        "last_setup_crc32" : "E069C3EBa750b960",
+        "scrollLine" : "230",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
