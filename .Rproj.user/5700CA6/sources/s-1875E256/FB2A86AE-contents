@@ -14,11 +14,11 @@ TrainAndTestSets <- function(label,p,data,seed){
 }
 
 
-EP <- PPfunction(EP)
-EP <- RmOut(EP)
-corr_all <- cor(EP)
-
-corrplot(corr_all)
+# EP <- PPfunction(EP)
+# EP <- RmOut(EP)
+# corr_all <- cor(EP)
+# 
+# corrplot(corr_all)
 
 
 

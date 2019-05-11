@@ -6,7 +6,11 @@ library(dplyr)
 library(rpart)
 library(reshape)
 library(corrplot)
-
+install.packages('rstudioapi')
+install.packages('rpart')
+install.packages('e1071')
+install.packages('reshape')
+install.packages('')
 #For cleaning variables
 #rm(list = setdiff(ls(), lsf.str()))
 
