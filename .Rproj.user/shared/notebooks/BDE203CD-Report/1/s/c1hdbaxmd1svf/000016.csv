@@ -1,2 +1,0 @@
-"0","ggplot(compare_var_mod_melt, aes(x=model,y=value)) + geom_col() + facet_grid(metric~., scales=""free"") +theme(axis.text=element_text(size=3),"
-"0","        axis.title=element_text(size=14,face=""bold""))"

@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554278814671.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "984602199",
+    "id" : "54C5A8F0",
+    "lastKnownWriteTime" : 1554387502,
+    "last_content_update" : 1554387502691,
+    "path" : "~/Documents/Ubiqum/R-M2Task3/Scripts/Draft.R",
+    "project_path" : "Scripts/Draft.R",
+    "properties" : {
+        "cursorPosition" : "95,6",
+        "docOutlineSize" : "111",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

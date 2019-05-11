@@ -1,20 +1,25 @@
 
 ---
-title: "Multiple Regression "
-
+title: 'Multiple Regression '
 author: "José Pedro Conceição,Kiko Sánchez , Eloi Cirera"
 date: "March 25, 2019"
-output: 
-
+output:
+  word_document:
+    toc: yes
+    toc_depth: '5'
+  pdf_document:
+    toc: yes
+    toc_depth: '5'
   html_document:
-    toc: true
+    code_folding: hide
+    theme: cerulean
+    toc: yes
     toc_depth: 5
-    toc_float: true
-    theme: "cerulean" 
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
 library(caret)
 library(readr)
 library(rstudioapi)
@@ -34,8 +39,9 @@ library(corrplot)
 #setwd(dirname(current_path))
 #setwd("..")
 #rm(current_path)
-EP <- read.csv( file ="/home/zordo/Documents/Ubiqum/R-Task3/data/Epa.csv" , header = TRUE , sep = ',')
-NP <- read.csv(file = "/home/zordo/Documents/Ubiqum/R-Task3/data/Npa.csv", header = TRUE , sep =',')
+EP <- read.csv( file ="/home/zordo/Documents/Ubiqum/R-M2Task3/data/Epa.csv" , header = TRUE , sep = ',')
+NP <- read.csv(file = "/home/zordo/Documents/Ubiqum/R-M2Task3/data/Npa.csv", header = TRUE , sep =',')
+
 
 
 ```
@@ -362,7 +368,7 @@ List <- TrainAndTestSets(EP$Volume,0.75,EP,123)
 </br>
 </br>
 
-```{r, warning=FALSE}
+```{r, warning=FALSE,echo=FALSE}
 
 TrainingFunction <- function(method,formula,data,tune = 0,c=1000,gamma=0.0001)
   {
@@ -407,7 +413,7 @@ TrainingFunction <- function(method,formula,data,tune = 0,c=1000,gamma=0.0001)
 
 
 
-EP <- read.csv( file ="/home/zordo/Documents/Ubiqum/R-Task3/data/Epa.csv" , header = TRUE , sep = ',')
+EP <- read.csv( file ="/home/zordo/Documents/Ubiqum/R-M2Task3/data/Epa.csv" , header = TRUE , sep = ',')
 
 EP <- EP[,c(1,5,9,18)]
 
@@ -644,7 +650,7 @@ ggplot(Lol,
 </br>
 </br>  
 ```{r}
-NP <- read.csv(file = "/home/zordo/Documents/Ubiqum/R-Task3/data/Npa.csv", header = TRUE , sep =',')
+NP <- read.csv(file = "/home/zordo/Documents/Ubiqum/R-M2Task3/data/Npa.csv", header = TRUE , sep =',')
 
 NP <- PPfunction(NP)
 

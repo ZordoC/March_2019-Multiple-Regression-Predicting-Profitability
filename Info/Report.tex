@@ -1,0 +1,924 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Multiple Regression},
+            pdfauthor={José Pedro Conceição,Kiko Sánchez , Eloi Cirera},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Multiple Regression}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{José Pedro Conceição,Kiko Sánchez , Eloi Cirera}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{March 25, 2019}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{5}
+\tableofcontents
+}
+\subsection{Executive Summary}\label{executive-summary}
+
+The first Objective was accurately Predicting Sales Volume, this has not
+been fully achieved because of the small data set provided to the team,
+we did train some models and made some predictions,however, they
+accurate and the errors are big, but it was the best information value
+we could extract from this sample. Predicting the sales of new Products
+using a reduced sample won't be accurate, besides being statistically
+unsound. We found out that what actually predicts success in volume are
+both, however the best predictor for successe comes from service reviews
+with an importance of 100\% according to a random forest algorithm,
+followed by a a 50\% importance of 4 star reviews.\\
+ Why 4 star reviews and not other reviews ? Well because they had to be
+taken out of our model training, they had levels of relationship with
+our predictor (Volume) so high that they were biasing the whole model,
+making the predictions even more unreliable.For example the 5 star
+review had a perfect correlation with the Volume, this means that the
+volume would grow at the same rate as a the 5 star reviews increased,
+which does not translate into reality. Nonetheless here are our final
+predictions.
+
+\begin{longtable}[]{@{}lcr@{}}
+\toprule
+Number & Volume & Profit\tabularnewline
+\midrule
+\endhead
+Game Console & 1735.3872 & 347.07744\tabularnewline
+Game Console & 1735.3872 & 312.36970\tabularnewline
+Tablet & 1319.6391 & 118.76752\tabularnewline
+Tablet & 1211.3776 & 109.02398\tabularnewline
+NoteBook & 877.6156 & 87.76156\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsection{Technical Report}\label{technical-report}
+
+\subsubsection{Pre-process}\label{pre-process}
+
+We always start by assesing the importance of each variable, we achieve
+this by doing a correlation matrix and training a simple model, followed
+by a varImp(), which will give us in percentage the importance of the
+variable for the model's prediction.(We need to first use a correlation
+matrix to see the correlation values, and take out anything that migh
+bias our model, otherwise the ``biased'', features will just appear at
+the top of the varImp() output).\\
+ We created a function to dummyfy the variables and to check if there
+was any NA values (in any attribute), and if they exist, remove them, I
+also included a function that removes outliers, and a function to subset
+the data into different product types.
+
+\subsubsection{Process functions}\label{process-functions}
+
+\paragraph{Pre-process}\label{pre-process-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PPfunction <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(data) \{}
+  
+\NormalTok{  N <-}\StringTok{ }\KeywordTok{dummyVars}\NormalTok{(}\StringTok{" ~ ."}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ data)}
+  
+\NormalTok{  N <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{predict}\NormalTok{(N, }\DataTypeTok{newdata =}\NormalTok{ data))}
+  
+\NormalTok{  N <-}\StringTok{ }\NormalTok{N[,}\KeywordTok{colSums}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(N)) }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{] }
+  
+\NormalTok{  N }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Remove Outliers}\label{remove-outliers}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RmOut <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(D,V)}
+
+\NormalTok{  \{}
+  
+\NormalTok{  Out <-}\StringTok{ }\KeywordTok{boxplot}\NormalTok{(D}\OperatorTok{$}\NormalTok{V ,}\DataTypeTok{plot =} \OtherTok{FALSE}\NormalTok{)}\OperatorTok{$}\NormalTok{out}
+\NormalTok{  K <-}\StringTok{ }\NormalTok{D[}\OperatorTok{-}\KeywordTok{which}\NormalTok{(D}\OperatorTok{$}\NormalTok{V }\OperatorTok{%in%}\StringTok{ }\NormalTok{Out),]}
+\NormalTok{  K}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Sub-set by product types}\label{sub-set-by-product-types}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SubSetDataProductTypes <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(data,p,}\DataTypeTok{p1 =} \DecValTok{0}\NormalTok{,}\DataTypeTok{p2 =} \DecValTok{0}\NormalTok{ , }\DataTypeTok{p3 =} \DecValTok{0}\NormalTok{ , }\DataTypeTok{p4 =} \DecValTok{0}\NormalTok{)}
+
+\NormalTok{  \{}
+  \ControlFlowTok{if}\NormalTok{ ( p1 }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&&}\StringTok{ }\NormalTok{p2 }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&&}\StringTok{ }\NormalTok{p3 }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&&}\StringTok{ }\NormalTok{p4 }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{  \{}
+\NormalTok{    Nsub <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p)}
+    
+    \KeywordTok{return}\NormalTok{(Nsub)}
+\NormalTok{  \}}
+  \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (p2 }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&&}\StringTok{ }\NormalTok{p3 }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&&}\StringTok{ }\NormalTok{p4 }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)\{}
+\NormalTok{    Nsub <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p)}
+    
+\NormalTok{    Nsub2 <-}\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p1)}
+    
+\NormalTok{    Nsub2 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(Nsub,Nsub2)}
+    
+    \KeywordTok{return}\NormalTok{(Nsub2)}
+\NormalTok{  \}}
+  \ControlFlowTok{else}  \ControlFlowTok{if}\NormalTok{ (p3 }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&&}\StringTok{ }\NormalTok{p4 }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{) }
+\NormalTok{  \{}
+    
+\NormalTok{    Nsub <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p)}
+    
+\NormalTok{    Nsub2 <-}\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p1)}
+    
+\NormalTok{    Nsub3 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data,data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p2)}
+    
+\NormalTok{    Nsub3 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(Nsub,Nsub2,Nsub3)}
+    
+    \KeywordTok{return}\NormalTok{(Nsub3)}
+    
+\NormalTok{  \}}
+  
+  \ControlFlowTok{else}  \ControlFlowTok{if}\NormalTok{ (p4 }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)\{}
+\NormalTok{    Nsub <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p)}
+    
+\NormalTok{    Nsub2 <-}\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p1)}
+    
+\NormalTok{    Nsub3 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data,data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p2)}
+    
+\NormalTok{    Nsub4 <-}\StringTok{ }\KeywordTok{subeset}\NormalTok{(data,data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p3)}
+    
+\NormalTok{    Nsub4 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(Nsub,Nsub2,Nsub3,Nsub4)}
+    
+    \KeywordTok{return}\NormalTok{(Nsub4)}
+\NormalTok{  \}}
+  
+  \ControlFlowTok{else}\NormalTok{\{}
+    
+\NormalTok{    Nsub <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p)}
+    
+\NormalTok{    Nsub2 <-}\KeywordTok{subset}\NormalTok{(data, data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p1)}
+    
+\NormalTok{    Nsub3 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data,data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p2)}
+    
+\NormalTok{    Nsub4 <-}\StringTok{ }\KeywordTok{subeset}\NormalTok{(data,data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p3)}
+    
+\NormalTok{    Nsub5 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(data,data}\OperatorTok{$}\NormalTok{ProductType }\OperatorTok{==}\StringTok{ }\NormalTok{p4)}
+    
+\NormalTok{    Nsub5 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(Nsub,Nsub2,Nsub3,Nsub4,Nsub5)}
+    
+    \KeywordTok{return}\NormalTok{(Nsub5)}
+\NormalTok{  \} }
+\NormalTok{\}}
+
+\NormalTok{#### I know it's not the most pretty or effective way to do this, but it works.}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Correlation Matrix :}\label{correlation-matrix}
+
+\\
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EP <-}\StringTok{ }\KeywordTok{PPfunction}\NormalTok{(EP)}
+\NormalTok{EP <-}\StringTok{ }\KeywordTok{RmOut}\NormalTok{(EP,Volume)}
+
+\NormalTok{corr_all<-}\KeywordTok{cor}\NormalTok{(EP)}
+
+
+
+\NormalTok{corrplot}\OperatorTok{::}\StringTok{ }\KeywordTok{corrplot}\NormalTok{(corr_all,}\DataTypeTok{type=}\StringTok{"upper"}\NormalTok{,}\DataTypeTok{tl.pos=}\StringTok{"td"}\NormalTok{,}\DataTypeTok{method=}\StringTok{"circle"}\NormalTok{,}\DataTypeTok{tl.cex =} \FloatTok{0.5}\NormalTok{,}\DataTypeTok{tl.col=}\StringTok{'black'}\NormalTok{,}\DataTypeTok{diag=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+This information does not differ from the module 1's counterpart, it's
+obvius because we are using the same data set.
+
+\\
+
+We trained a random forest followed by the use of varImp() function that
+assess the importance of each variables (without the ones we took out by
+looking at the correlation matrix). But first we need to create Test and
+Training sets, we also came up with a simple function to automate the
+processs.
+
+\paragraph{Train and Test Set
+function}\label{train-and-test-set-function}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TrainAndTestSets <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(label,p,data,seed)\{}
+  \KeywordTok{set.seed}\NormalTok{(seed)}
+  
+\NormalTok{  inTrain <-}\StringTok{ }\KeywordTok{createDataPartition}\NormalTok{(}\DataTypeTok{y=}\NormalTok{ label, }\DataTypeTok{p =}\NormalTok{ p , }\DataTypeTok{list =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{  training <-}\StringTok{ }\NormalTok{data[inTrain,]}
+\NormalTok{  testing <-}\StringTok{ }\NormalTok{data[}\OperatorTok{-}\NormalTok{inTrain,]}
+  
+  
+  \KeywordTok{list}\NormalTok{(}\DataTypeTok{trainingSet=}\NormalTok{training,}\DataTypeTok{testingSet =}\NormalTok{ testing)}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EP <-}\StringTok{ }\NormalTok{EP[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{27}\NormalTok{,}\DecValTok{28}\NormalTok{)]}
+
+\NormalTok{List <-}\StringTok{ }\KeywordTok{TrainAndTestSets}\NormalTok{(EP}\OperatorTok{$}\NormalTok{Volume,}\FloatTok{0.75}\NormalTok{,EP,}\DecValTok{123}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ fitcontrol <-}\StringTok{  }\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method =} \StringTok{"repeatedcv"}\NormalTok{, }\DataTypeTok{repeats =} \DecValTok{4}\NormalTok{)}
+
+\NormalTok{  Model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(Volume}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ EP,}\DataTypeTok{method =} \StringTok{"rf"}\NormalTok{, }\DataTypeTok{trcontrol =}\NormalTok{ fitcontrol , }\DataTypeTok{tunelenght =} \DecValTok{5}
+\NormalTok{                 , }\DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"scale"}\NormalTok{),}\DataTypeTok{importance=}\NormalTok{T)  }
+  
+  \KeywordTok{varImp}\NormalTok{(Model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## rf variable importance
+## 
+##   only 20 most important variables shown (out of 24)
+## 
+##                              Overall
+## PositiveServiceReview        100.000
+## x4StarReviews                 46.607
+## ProductWidth                  11.786
+## ShippingWeight                10.171
+## Price                          9.865
+## x2StarReviews                  9.387
+## ProductType.ExtendedWarranty   8.821
+## ProductType.Printer            7.122
+## ProfitMargin                   6.530
+## ProductDepth                   6.083
+## ProductType.Tablet             6.030
+## ProductType.Software           5.748
+## ProductHeight                  4.535
+## ProductType.GameConsole        3.915
+## Recommendproduct               3.785
+## ProductType.Accessories        3.465
+## ProductType.Smartphone         3.014
+## ProductType.PC                 2.530
+## ProductType.Display            2.499
+## NegativeServiceReview          2.344
+\end{verbatim}
+
+So the only variables with a significant impact are only
+PostiveServiceReview and x4StarReviews.
+
+\subsection{Models and Predictions}\label{models-and-predictions}
+
+\subsubsection{Training Function}\label{training-function}
+
+ I created a function that trains every different model, by user
+specification
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EP <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{( }\DataTypeTok{file =}\StringTok{"/home/zordo/Documents/Ubiqum/R-M2Task3/data/Epa.csv"}\NormalTok{ , }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{ , }\DataTypeTok{sep =} \StringTok{','}\NormalTok{)}
+
+\NormalTok{EP <-}\StringTok{ }\NormalTok{EP[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{18}\NormalTok{)]}
+
+\NormalTok{EP <-}\StringTok{ }\KeywordTok{PPfunction}\NormalTok{(EP)}
+
+\NormalTok{EP <-}\StringTok{ }\KeywordTok{RmOut}\NormalTok{(EP)}
+
+\NormalTok{List <-}\StringTok{ }\KeywordTok{TrainAndTestSets}\NormalTok{(EP}\OperatorTok{$}\NormalTok{Volume,}\FloatTok{0.75}\NormalTok{,EP,}\DecValTok{123}\NormalTok{)}
+
+
+\NormalTok{#### Random Forest ####}
+\NormalTok{ModelRandomForest <-}\StringTok{ }\KeywordTok{TrainingFunction}\NormalTok{(}\StringTok{"rf"}\NormalTok{,Volume}\OperatorTok{~}\NormalTok{.,List}\OperatorTok{$}\NormalTok{trainingSet,}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{PredictionRandomForest <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(ModelRandomForest,List}\OperatorTok{$}\NormalTok{testingSet)}
+
+\NormalTok{TestResultsRF <-}\StringTok{ }\KeywordTok{postResample}\NormalTok{(PredictionRandomForest,List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume)}
+
+\NormalTok{#### SVM ####}
+
+\NormalTok{svm.model <-}\StringTok{ }\KeywordTok{TrainingFunction}\NormalTok{(}\StringTok{"svm"}\NormalTok{,Volume}\OperatorTok{~}\NormalTok{.,List}\OperatorTok{$}\NormalTok{trainingSet,}\DecValTok{5}\NormalTok{,}\DecValTok{10000000}\NormalTok{,}\FloatTok{0.0000001}\NormalTok{)  }
+
+\NormalTok{svm.pred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(svm.model,List}\OperatorTok{$}\NormalTok{testingSet)}
+
+\NormalTok{TestResultsSVM <-}\StringTok{ }\KeywordTok{postResample}\NormalTok{(svm.pred,List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume)}
+
+
+\NormalTok{#### knn ####}
+
+\NormalTok{ KNN <-}\StringTok{ }\KeywordTok{TrainingFunction}\NormalTok{(}\StringTok{"knn"}\NormalTok{,Volume}\OperatorTok{~}\NormalTok{.,List}\OperatorTok{$}\NormalTok{trainingSet,}\DecValTok{30}\NormalTok{)}
+
+\NormalTok{KnnPrediction <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(KNN,List}\OperatorTok{$}\NormalTok{testingSet)}
+
+\NormalTok{TestResultsKNN <-}\KeywordTok{postResample}\NormalTok{(KnnPrediction,List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume)}
+
+\NormalTok{####}
+
+
+\NormalTok{AllTestResults <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(TestResultsKNN,TestResultsRF,TestResultsSVM)}
+
+\NormalTok{AllTestResults    }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          TestResultsKNN TestResultsRF TestResultsSVM
+## RMSE        429.1288137   271.9646084    788.7251446
+## Rsquared      0.6828584     0.8447768      0.2698622
+## MAE         250.9259259   156.6409058    553.4143148
+\end{verbatim}
+
+And then did another one t train the three models at the same time with
+a for loop
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TrainAll3Models <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (formula,data)}
+\NormalTok{  \{}
+
+\NormalTok{  Model <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\DataTypeTok{mode=}\StringTok{"list"}\NormalTok{, }\DataTypeTok{length=}\KeywordTok{length}\NormalTok{(methods))}
+
+\NormalTok{      methods <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"rf"}\NormalTok{,}\StringTok{"svm"}\NormalTok{,}\StringTok{"knn"}\NormalTok{)}
+        
+      \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(methods))}
+\NormalTok{          \{    }
+      
+\NormalTok{            Model[[i]] <-}\StringTok{ }\KeywordTok{TrainingFunction}\NormalTok{(methods[i],formula,data,}\DecValTok{5}\NormalTok{)}
+
+               
+
+\NormalTok{      \}}
+\NormalTok{    Model}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+ I didn't use this function that much since the mentors showed us
+another way of training without any function, and it's much easier and
+cleaner.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Volume ~ x4StarReviews"}\NormalTok{,}\StringTok{"Volume ~."}\NormalTok{,}\StringTok{"Volume ~ PositiveServiceReview"}\NormalTok{)}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"lm"}\NormalTok{,}\StringTok{"rf"}\NormalTok{, }\StringTok{"knn"}\NormalTok{,}\StringTok{"svmLinear"}\NormalTok{)}
+\NormalTok{compare_var_mod <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{ ( i   }\ControlFlowTok{in}\NormalTok{ a) \{}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in}\NormalTok{ b) \{}
+    
+\NormalTok{    model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}\KeywordTok{formula}\NormalTok{(i), }\DataTypeTok{data =}\NormalTok{ List}\OperatorTok{$}\NormalTok{trainingSet, }\DataTypeTok{method =}\NormalTok{ b,}\DataTypeTok{trainControl=}\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method =} \StringTok{"repeatedcv"}\NormalTok{, }\DataTypeTok{repeats =} \DecValTok{4}\NormalTok{))}
+    
+\NormalTok{    pred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, }\DataTypeTok{newdata =}\NormalTok{ List}\OperatorTok{$}\NormalTok{testingSet)}
+    
+\NormalTok{    pred_metric <-}\StringTok{ }\KeywordTok{postResample}\NormalTok{(List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume, pred)}
+    
+\NormalTok{    compare_var_mod <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(compare_var_mod , pred_metric)}
+    
+\NormalTok{  \}}
+  
+\NormalTok{\}}
+\NormalTok{      compare_var_mod}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          pred_metric pred_metric pred_metric pred_metric pred_metric
+## RMSE     459.4407974 459.4407974 459.4407974 459.4407974 482.8296811
+## Rsquared   0.5286655   0.5286655   0.5286655   0.5286655   0.5398693
+## MAE      338.0400480 338.0400480 338.0400480 338.0400480 254.6791507
+##          pred_metric pred_metric pred_metric pred_metric pred_metric
+## RMSE     482.8296811 482.8296811 482.8296811 568.6757233 568.6757233
+## Rsquared   0.5398693   0.5398693   0.5398693   0.2851607   0.2851607
+## MAE      254.6791507 254.6791507 254.6791507 436.9034926 436.9034926
+##          pred_metric pred_metric
+## RMSE     568.6757233 568.6757233
+## Rsquared   0.2851607   0.2851607
+## MAE      436.9034926 436.9034926
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{names_var <-}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ a) \{}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in}\NormalTok{ b) \{}
+\NormalTok{    names_var <-}\StringTok{ }\KeywordTok{append}\NormalTok{(names_var,}\KeywordTok{paste}\NormalTok{(i,j))}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+
+\NormalTok{names_var}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Volume ~ x4StarReviews lm"               
+##  [2] "Volume ~ x4StarReviews rf"               
+##  [3] "Volume ~ x4StarReviews knn"              
+##  [4] "Volume ~ x4StarReviews svmLinear"        
+##  [5] "Volume ~. lm"                            
+##  [6] "Volume ~. rf"                            
+##  [7] "Volume ~. knn"                           
+##  [8] "Volume ~. svmLinear"                     
+##  [9] "Volume ~ PositiveServiceReview lm"       
+## [10] "Volume ~ PositiveServiceReview rf"       
+## [11] "Volume ~ PositiveServiceReview knn"      
+## [12] "Volume ~ PositiveServiceReview svmLinear"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colnames}\NormalTok{(compare_var_mod) <-}\StringTok{ }\NormalTok{names_var}
+
+\NormalTok{compare_var_mod}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Volume ~ x4StarReviews lm Volume ~ x4StarReviews rf
+## RMSE                   459.4407974               459.4407974
+## Rsquared                 0.5286655                 0.5286655
+## MAE                    338.0400480               338.0400480
+##          Volume ~ x4StarReviews knn Volume ~ x4StarReviews svmLinear
+## RMSE                    459.4407974                      459.4407974
+## Rsquared                  0.5286655                        0.5286655
+## MAE                     338.0400480                      338.0400480
+##          Volume ~. lm Volume ~. rf Volume ~. knn Volume ~. svmLinear
+## RMSE      482.8296811  482.8296811   482.8296811         482.8296811
+## Rsquared    0.5398693    0.5398693     0.5398693           0.5398693
+## MAE       254.6791507  254.6791507   254.6791507         254.6791507
+##          Volume ~ PositiveServiceReview lm
+## RMSE                           568.6757233
+## Rsquared                         0.2851607
+## MAE                            436.9034926
+##          Volume ~ PositiveServiceReview rf
+## RMSE                           568.6757233
+## Rsquared                         0.2851607
+## MAE                            436.9034926
+##          Volume ~ PositiveServiceReview knn
+## RMSE                            568.6757233
+## Rsquared                          0.2851607
+## MAE                             436.9034926
+##          Volume ~ PositiveServiceReview svmLinear
+## RMSE                                  568.6757233
+## Rsquared                                0.2851607
+## MAE                                   436.9034926
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{compare_var_mod_melt <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(compare_var_mod, }\DataTypeTok{varnames =} \KeywordTok{c}\NormalTok{(}\StringTok{"metric"}\NormalTok{, }\StringTok{"model"}\NormalTok{))}
+\NormalTok{compare_var_mod_melt <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(compare_var_mod_melt)}
+\NormalTok{compare_var_mod_melt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      metric                                    model       value
+## 1      RMSE                Volume ~ x4StarReviews lm 459.4407974
+## 2  Rsquared                Volume ~ x4StarReviews lm   0.5286655
+## 3       MAE                Volume ~ x4StarReviews lm 338.0400480
+## 4      RMSE                Volume ~ x4StarReviews rf 459.4407974
+## 5  Rsquared                Volume ~ x4StarReviews rf   0.5286655
+## 6       MAE                Volume ~ x4StarReviews rf 338.0400480
+## 7      RMSE               Volume ~ x4StarReviews knn 459.4407974
+## 8  Rsquared               Volume ~ x4StarReviews knn   0.5286655
+## 9       MAE               Volume ~ x4StarReviews knn 338.0400480
+## 10     RMSE         Volume ~ x4StarReviews svmLinear 459.4407974
+## 11 Rsquared         Volume ~ x4StarReviews svmLinear   0.5286655
+## 12      MAE         Volume ~ x4StarReviews svmLinear 338.0400480
+## 13     RMSE                             Volume ~. lm 482.8296811
+## 14 Rsquared                             Volume ~. lm   0.5398693
+## 15      MAE                             Volume ~. lm 254.6791507
+## 16     RMSE                             Volume ~. rf 482.8296811
+## 17 Rsquared                             Volume ~. rf   0.5398693
+## 18      MAE                             Volume ~. rf 254.6791507
+## 19     RMSE                            Volume ~. knn 482.8296811
+## 20 Rsquared                            Volume ~. knn   0.5398693
+## 21      MAE                            Volume ~. knn 254.6791507
+## 22     RMSE                      Volume ~. svmLinear 482.8296811
+## 23 Rsquared                      Volume ~. svmLinear   0.5398693
+## 24      MAE                      Volume ~. svmLinear 254.6791507
+## 25     RMSE        Volume ~ PositiveServiceReview lm 568.6757233
+## 26 Rsquared        Volume ~ PositiveServiceReview lm   0.2851607
+## 27      MAE        Volume ~ PositiveServiceReview lm 436.9034926
+## 28     RMSE        Volume ~ PositiveServiceReview rf 568.6757233
+## 29 Rsquared        Volume ~ PositiveServiceReview rf   0.2851607
+## 30      MAE        Volume ~ PositiveServiceReview rf 436.9034926
+## 31     RMSE       Volume ~ PositiveServiceReview knn 568.6757233
+## 32 Rsquared       Volume ~ PositiveServiceReview knn   0.2851607
+## 33      MAE       Volume ~ PositiveServiceReview knn 436.9034926
+## 34     RMSE Volume ~ PositiveServiceReview svmLinear 568.6757233
+## 35 Rsquared Volume ~ PositiveServiceReview svmLinear   0.2851607
+## 36      MAE Volume ~ PositiveServiceReview svmLinear 436.9034926
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(compare_var_mod_melt, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{model,}\DataTypeTok{y=}\NormalTok{value)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_grid}\NormalTok{(metric}\OperatorTok{~}\NormalTok{., }\DataTypeTok{scales=}\StringTok{"free"}\NormalTok{) }\OperatorTok{+}\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text=}\KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{3}\NormalTok{),}
+        \DataTypeTok{axis.title=}\KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size=}\DecValTok{14}\NormalTok{,}\DataTypeTok{face=}\StringTok{"bold"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-11-1.pdf} I
+only used RF, and KNN because from past results the SVM did not look
+like a good fit.
+
+\subsubsection{Error Analysis}\label{error-analysis}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ABSrf <-}\StringTok{ }\NormalTok{(List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume }\OperatorTok{-}\StringTok{ }\NormalTok{PredictionRandomForest)}
+
+\NormalTok{RLTrf <-}\StringTok{  }\NormalTok{(ABSrf }\OperatorTok{/}\StringTok{ }\NormalTok{List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume)}
+
+\NormalTok{ABSsvm <-}\StringTok{ }\NormalTok{(List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume }\OperatorTok{-}\StringTok{ }\NormalTok{svm.pred)}
+
+\NormalTok{RLTsvm <-}\StringTok{ }\NormalTok{(ABSsvm }\OperatorTok{/}\StringTok{ }\NormalTok{List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume)}
+
+
+
+\NormalTok{Absknn <-}\StringTok{ }\NormalTok{(List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume }\OperatorTok{-}\StringTok{ }\NormalTok{KnnPrediction)}
+
+\NormalTok{RLTknn <-}\StringTok{  }\NormalTok{(Absknn }\OperatorTok{/}\StringTok{ }\NormalTok{List}\OperatorTok{$}\NormalTok{testingSet}\OperatorTok{$}\NormalTok{Volume)}
+ \CommentTok{#abline(0, 0)                  # the horizon}
+
+
+\NormalTok{Lol <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(List}\OperatorTok{$}\NormalTok{testingSet,ABSrf)}
+\end{Highlighting}
+\end{Shaded}
+
+ Random Forest Residuals
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Lol,}
+      \KeywordTok{aes}\NormalTok{(Lol}\OperatorTok{$}\NormalTok{Volume,ABSrf))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Lol,}
+      \KeywordTok{aes}\NormalTok{(Lol}\OperatorTok{$}\NormalTok{Volume,RLTrf))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-13-2.pdf} Svm
+Residuals
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Lol,}
+      \KeywordTok{aes}\NormalTok{(Lol}\OperatorTok{$}\NormalTok{Volume,ABSsvm))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Lol,}
+      \KeywordTok{aes}\NormalTok{(Lol}\OperatorTok{$}\NormalTok{Volume,RLTsvm))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-14-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Lol,}
+      \KeywordTok{aes}\NormalTok{(Lol}\OperatorTok{$}\NormalTok{Volume,Absknn))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Lol,}
+      \KeywordTok{aes}\NormalTok{(Lol}\OperatorTok{$}\NormalTok{Volume,RLTknn))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Report_files/figure-latex/unnamed-chunk-15-2.pdf}
+
+ Let's now apply the current models into the new product list and make a
+top 5 for most probably sold products in volume.
+
+\subsubsection{Prediction}\label{prediction}
+
+ The random forest was the one who gave us the best results, with both
+variables (ProductServiceReview,x4StarReviews).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NP <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"/home/zordo/Documents/Ubiqum/R-M2Task3/data/Npa.csv"}\NormalTok{, }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{ , }\DataTypeTok{sep =}\StringTok{','}\NormalTok{)}
+
+\NormalTok{NP <-}\StringTok{ }\KeywordTok{PPfunction}\NormalTok{(NP)}
+
+\NormalTok{NewProductsVolume <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(ModelRandomForest,NP)}
+
+\NormalTok{NP}\OperatorTok{$}\NormalTok{Volume<-NewProductsVolume}
+\end{Highlighting}
+\end{Shaded}
+
+ \\
+ \\
+We got the volume, now we need to calculate the profit, to see which
+products types we should invest on.
+
+\textbf{Profit = profit margin * Volume}
+
+ \\
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  Profit <-}\StringTok{ }\NormalTok{NP}\OperatorTok{$}\NormalTok{ProfitMargin }\OperatorTok{*}\StringTok{ }\NormalTok{NP}\OperatorTok{$}\NormalTok{Volume}
+
+\NormalTok{  NP <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(NP,Profit)  }
+
+  
+\NormalTok{Top5 <-}\StringTok{  }\KeywordTok{top_n}\NormalTok{(NP, }\DecValTok{5}\NormalTok{, Profit)}
+  
+\NormalTok{Top5 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{ (Top5,}\KeywordTok{sort}\NormalTok{(Top5}\OperatorTok{$}\NormalTok{Profit))}
+ 
+\NormalTok{Top5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ProductType.Accessories ProductType.Display ProductType.ExtendedWarranty
+## 1                       0                   0                            0
+## 2                       0                   0                            0
+## 3                       0                   0                            0
+## 4                       0                   0                            0
+## 5                       0                   0                            0
+##   ProductType.GameConsole ProductType.Laptop ProductType.Netbook
+## 1                       0                  0                   1
+## 2                       0                  0                   0
+## 3                       0                  0                   0
+## 4                       1                  0                   0
+## 5                       1                  0                   0
+##   ProductType.PC ProductType.Printer ProductType.PrinterSupplies
+## 1              0                   0                           0
+## 2              0                   0                           0
+## 3              0                   0                           0
+## 4              0                   0                           0
+## 5              0                   0                           0
+##   ProductType.Smartphone ProductType.Software ProductType.Tablet
+## 1                      0                    0                  0
+## 2                      0                    0                  1
+## 3                      0                    0                  1
+## 4                      0                    0                  0
+## 5                      0                    0                  0
+##   ProductNum  Price x5StarReviews x4StarReviews x3StarReviews
+## 1        180 329.00           312           112            28
+## 2        186 629.00           296            66            30
+## 3        187 199.00           943           437           224
+## 4        199 249.99           462            97            25
+## 5        307 425.00          1525           252            99
+##   x2StarReviews x1StarReviews PositiveServiceReview NegativeServiceReview
+## 1            31            47                    28                    16
+## 2            21            36                    28                     9
+## 3           160           247                    90                    23
+## 4            17            58                    32                    12
+## 5            56            45                    59                    13
+##   Recommendproduct BestSellersRank ShippingWeight ProductDepth
+## 1              0.7            2699            4.6        10.17
+## 2              0.8              34            3.0         7.31
+## 3              0.8               1            0.9         5.40
+## 4              0.8             115            8.4         6.20
+## 5              0.9             215           20.0         8.50
+##   ProductWidth ProductHeight ProfitMargin   Volume   Profit
+## 1         7.28          0.95         0.09 1386.986 124.8287
+## 2         9.50          0.37         0.10 1371.081 137.1081
+## 3         7.60          0.40         0.20 1835.990 367.1979
+## 4        13.20         13.20         0.09 1513.556 136.2200
+## 5         6.00          1.75         0.18 1843.867 331.8960
+##   sort(Top5$Profit)
+## 1          124.8287
+## 2          136.2200
+## 3          137.1081
+## 4          331.8960
+## 5          367.1979
+\end{verbatim}
+
+ \\
+ Our top 5 most profitable product types are \\
+ \\
+
+\begin{longtable}[]{@{}lcr@{}}
+\toprule
+Number & Volume & Profit\tabularnewline
+\midrule
+\endhead
+Game Console & 1735.3872 & 347.07744\tabularnewline
+Game Console & 1735.3872 & 312.36970\tabularnewline
+Tablet & 1319.6391 & 118.76752\tabularnewline
+Tablet & 1211.3776 & 109.02398\tabularnewline
+NoteBook & 877.6156 & 87.76156\tabularnewline
+\bottomrule
+\end{longtable}
+
+\\
+ \\
+
+\subsection{Conclusion}\label{conclusion}
+
+ \\
+
+All three models used are non-parametric, but before explaining what a
+non-parametric model is, I would like to explain what parametric models
+are. Parametric models are algorithms that simplify the function to a
+known form, and no matter how much data that's fed to the algorithm, the
+model won't change the quantity of parameters needed.All you need to
+know for predicting a future data balue from the current state of the
+model are his parameters,EG : Linear regression with on variable, you
+have two parameters (coefficient and intercept).Knowing this parameters
+will enable you to predict new values. In a mathematical way : \\
+\textbf{Yi = B0 + B1X1 + B2X2 + \ldots{} + ei} Non-parametric models do
+not make any fixed assumptions about the form of the mapping, they are
+free to learn from the training data. The parameters are usually said to
+be infinite in dimension and so can express the characteristics in data
+much better than parametric models. E.g : KNN, makes predictions based
+on the k most similar training patterns for a new data instance. The
+method does not assume anything about the form of the mapping function
+other than patterns that are close are likely have a similar output
+variable. In mathematical form \textbf{Yi=F(xi) + ei} Where F can be any
+function,the data will decide what the function looks like.It will not
+provide the analytical expression but it will give you its graph given
+your data set. I find this picture very helpfull in understanding how
+both types of models work, summing up in easy non- technical language,
+parametric models follow an equation while non-parametric models follow
+the data. One of the requirements to use a non-parametric model is to
+have a big set of data, we have 80 rows, 78 after cutting outliers and
+only 60 of them are for training.This is not a big set of data at all, I
+think it actually couldn't be any smaller than this. Also they are good
+methods when we don't have any prior knowledge and not worry about
+choosing the right features. So using this models is not efficient at
+all, if we are using algorithms that ``follow the data'' and we have
+almost no data, it's obvious why this approach is not efficient and why
+the errors are so big.
+
+
+\end{document}
