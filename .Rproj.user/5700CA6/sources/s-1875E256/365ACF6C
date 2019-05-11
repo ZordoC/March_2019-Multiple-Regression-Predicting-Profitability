@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557578015471.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "365ACF6C",
+    "lastKnownWriteTime" : 1557577482,
+    "last_content_update" : 1557578015471,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "48fb3823a5eb493ebe7ff50ce7fd44ad",
+        "name" : "List3models",
+        "title" : "List3models"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}
